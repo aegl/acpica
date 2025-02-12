@@ -168,6 +168,7 @@
  * file. Useful because they make it more difficult to inadvertently type in
  * the wrong signature.
  */
+#define ACPI_SIG_MRRM           "MRRM"      /* Memory Range and Region Mapping table */
 #define ACPI_SIG_SLIC           "SLIC"      /* Software Licensing Description Table */
 #define ACPI_SIG_SLIT           "SLIT"      /* System Locality Distance Information Table */
 #define ACPI_SIG_SPCR           "SPCR"      /* Serial Port Console Redirection table */
@@ -1033,6 +1034,57 @@ typedef struct acpi_table_xenv
 
 } ACPI_TABLE_XENV;
 
+/*******************************************************************************
+ *
+ * MRRM - Memory Range and Region Mapping (MRRM) table
+ *
+ ******************************************************************************/
+
+typedef struct acpi_table_mrrm {
+        ACPI_TABLE_HEADER   Header;             /* Common ACPI table header */
+        UINT8               MaxMemRegion;       /* Max Memory Regions supported */
+        UINT8               Flags;              /* Region assignment type */
+        UINT8               Reserved[26];
+        UINT8               Memory_Range_Entry[];
+
+} ACPI_TABLE_MRRM;
+
+/* Flags */
+#define ACPI_MRRM_FLAGS_REGION_ASSIGNMENT_OS    (1<<0)
+
+/*******************************************************************************
+ *
+ * Memory Range Subtable Header
+ *
+ ******************************************************************************/
+
+typedef struct acpi_table_mrrm_subtable_header {
+        UINT16              Type;               /* Type 0="MRRM" */
+        UINT16              Length;             /* Length */
+} ACPI_TABLE_MRRM_SUBTABLE_HEADER;
+
+/*******************************************************************************
+ *
+ * Memory Range entry - Memory Range entry in MRRM table
+ *
+ ******************************************************************************/
+
+typedef struct acpi_table_mrrm_mem_range_entry {
+        ACPI_TABLE_MRRM_SUBTABLE_HEADER Header;
+        UINT32              Reserved;           /* Reserved */
+        UINT64              AddrBase;           /* Base addr of the mem range */
+        UINT64              AddrLen;            /* Length of the mem range */
+        UINT16              RegionIdFlags;      /* Valid local or remote Region-ID */
+        UINT8               LocalRegionId;      /* Platform-assigned static local Region-ID */
+        UINT8               RemoteRegionId;     /* Platform-assigned static remote Region-ID */
+        UINT32              Reserved1;          /* Reserved */
+        /* Region-ID Programming Registers[] */
+
+} ACPI_TABLE_MRRM_MEM_RANGE_ENTRY;
+
+/* Values for RegionIdFlags above */
+#define ACPI_MRRM_VALID_REGION_ID_FLAGS_LOCAL   (1<<0)
+#define ACPI_MRRM_VALID_REGION_ID_FLAGS_REMOTE  (1<<1)
 
 /* Reset to default packing */
 
