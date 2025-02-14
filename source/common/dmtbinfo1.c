@@ -1190,6 +1190,53 @@ ACPI_DMTABLE_INFO           AcpiDmTableInfoEinj0[] =
 
 /*******************************************************************************
  *
+ * ERDT - Enhanced Resource Director Technology table
+ *
+ ******************************************************************************/
+
+ACPI_DMTABLE_INFO           AcpiDmTableInfoErdt[] =
+{
+    {ACPI_DMT_UINT32,   ACPI_ERDT_OFFSET (MaxClos),                 "Maximum supported CLOSID", 0},
+    ACPI_DMT_TERMINATOR
+};
+
+
+/*******************************************************************************
+ *
+ * ERDT - Common Subtable Header
+ *
+ ******************************************************************************/
+
+ACPI_DMTABLE_INFO           AcpiDmTableInfoErdtHdr[] =
+{
+    {ACPI_DMT_ERDT,     ACPI_ERDT_HDR_OFFSET (Type),                "Type", 0},
+    {ACPI_DMT_UINT16,   ACPI_ERDT_HDR_OFFSET (Length),              "Length", 0},
+    ACPI_DMT_TERMINATOR
+};
+
+
+/*******************************************************************************
+ *
+ * RMDD - ERDT Resource Management Domain Description subtable
+ *
+ ******************************************************************************/
+
+ACPI_DMTABLE_INFO           AcpiDmTableInfoErdtRmdd[] =
+{
+    {ACPI_DMT_UINT16,   ACPI_ERDT_RMDD_OFFSET (Flags),                   "Domain Type Flags", 0},
+    {ACPI_DMT_UINT16,   ACPI_ERDT_RMDD_OFFSET (IO_l3_Slices),            "I/O L3 Slices", 0},
+    {ACPI_DMT_UINT8,    ACPI_ERDT_RMDD_OFFSET (IO_l3_Sets),              "I/O L3 Sets", 0},
+    {ACPI_DMT_UINT8,    ACPI_ERDT_RMDD_OFFSET (IO_l3_Ways),              "I/O L3 Ways", 0},
+    {ACPI_DMT_UINT16,   ACPI_ERDT_RMDD_OFFSET (DomainId),                "Domain ID", 0},
+    {ACPI_DMT_UINT32,   ACPI_ERDT_RMDD_OFFSET (MaxRmid),                 "Maximum supported RMID", 0},
+    {ACPI_DMT_UINT64,   ACPI_ERDT_RMDD_OFFSET (CregBase),                "Control Register Base Address", 0},
+    {ACPI_DMT_UINT16,   ACPI_ERDT_RMDD_OFFSET (CregSize),                "Control Register Base Size", 0},
+    ACPI_DMT_TERMINATOR
+};
+
+
+/*******************************************************************************
+ *
  * ERST - Error Record Serialization table
  *
  ******************************************************************************/

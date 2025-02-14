@@ -269,6 +269,7 @@ typedef enum
     ACPI_DMT_DMAR_SCOPE,
     ACPI_DMT_EINJACT,
     ACPI_DMT_EINJINST,
+    ACPI_DMT_ERDT,
     ACPI_DMT_ERSTACT,
     ACPI_DMT_ERSTINST,
     ACPI_DMT_FADTPM,
@@ -461,6 +462,9 @@ extern ACPI_DMTABLE_INFO        AcpiDmTableInfoDrtm2[];
 extern ACPI_DMTABLE_INFO        AcpiDmTableInfoEcdt[];
 extern ACPI_DMTABLE_INFO        AcpiDmTableInfoEinj[];
 extern ACPI_DMTABLE_INFO        AcpiDmTableInfoEinj0[];
+extern ACPI_DMTABLE_INFO        AcpiDmTableInfoErdt[];
+extern ACPI_DMTABLE_INFO        AcpiDmTableInfoErdtHdr[];
+extern ACPI_DMTABLE_INFO        AcpiDmTableInfoErdtRmdd[];
 extern ACPI_DMTABLE_INFO        AcpiDmTableInfoErst[];
 extern ACPI_DMTABLE_INFO        AcpiDmTableInfoErst0[];
 extern ACPI_DMTABLE_INFO        AcpiDmTableInfoFacs[];

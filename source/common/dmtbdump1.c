@@ -1734,7 +1734,46 @@ void
 AcpiDmDumpErdt (
     ACPI_TABLE_HEADER       *Table)
 {
-	fprintf(stderr, "AcpiDmDumpErdt()\n");
+    ACPI_STATUS             Status;
+    ACPI_WIDE_HEADER        *Subtable;
+    UINT32                  Offset = sizeof (ACPI_TABLE_ERDT);
+
+    /* Main table */
+
+    Status = AcpiDmDumpTable (Table->Length, 0, Table, 0, AcpiDmTableInfoErdt);
+    if (ACPI_FAILURE (Status))
+    {
+        return;
+    }
+
+    /* Subtables */
+
+    Subtable = ACPI_ADD_PTR (ACPI_WIDE_HEADER, Table, Offset);
+    while (Offset < Table->Length)
+    {
+	/* Dump common header */
+        AcpiOsPrintf ("\n");
+        Status = AcpiDmDumpTable (Table->Length, Offset, Subtable,
+            Subtable->Length, AcpiDmTableInfoErdtHdr);
+        if (ACPI_FAILURE (Status))
+        {
+            return;
+        }
+
+        AcpiOsPrintf ("\n");
+        Status = AcpiDmDumpTable (Table->Length, Offset, Subtable,
+            Subtable->Length, AcpiDmTableInfoErdtRmdd);
+        if (ACPI_FAILURE (Status))
+        {
+            return;
+        }
+
+        /* Point to next subtable */
+
+        Offset += Subtable->Length;
+        Subtable = ACPI_ADD_PTR (ACPI_WIDE_HEADER, Subtable,
+            Subtable->Length);
+    }
 }
 
 
