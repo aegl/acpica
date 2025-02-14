@@ -1719,6 +1719,27 @@ AcpiDmDumpEinj (
 
 /*******************************************************************************
  *
+ * FUNCTION:    AcpiDmDumpErdt
+ *
+ * PARAMETERS:  Table               - A ERDT table
+ *
+ * RETURN:      None
+ *
+ * DESCRIPTION: Format the contents of a ERST. This table type consists
+ *              of an open-ended number of subtables.
+ *
+ ******************************************************************************/
+
+void
+AcpiDmDumpErdt (
+    ACPI_TABLE_HEADER       *Table)
+{
+	fprintf(stderr, "AcpiDmDumpErdt()\n");
+}
+
+
+/*******************************************************************************
+ *
  * FUNCTION:    AcpiDmDumpErst
  *
  * PARAMETERS:  Table               - A ERST table

@@ -1748,6 +1748,28 @@ DtCompileEinj (
 
 /******************************************************************************
  *
+ * FUNCTION:    DtCompileErdt
+ *
+ * PARAMETERS:  List                - Current field list pointer
+ *
+ * RETURN:      Status
+ *
+ * DESCRIPTION: Compile ERST.
+ *
+ *****************************************************************************/
+
+ACPI_STATUS
+DtCompileErdt (
+    void                    **List)
+{
+    fprintf(stderr, "DtCompileErdt()\n");
+
+    return (AE_OK);
+}
+
+
+/******************************************************************************
+ *
  * FUNCTION:    DtCompileErst
  *
  * PARAMETERS:  List                - Current field list pointer

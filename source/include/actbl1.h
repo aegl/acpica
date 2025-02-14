@@ -260,6 +260,15 @@ typedef struct acpi_whea_header
 } ACPI_WHEA_HEADER;
 
 
+/* Subtable header for MRRM and ERDT tables */
+
+typedef struct acpi_wide_header
+{
+    UINT16                  Type;
+    UINT16                  Length;
+} ACPI_WIDE_HEADER;
+
+
 /*******************************************************************************
  *
  * ASF - Alert Standard Format table (Signature "ASF!")

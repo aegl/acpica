@@ -168,6 +168,7 @@
  * file. Useful because they make it more difficult to inadvertently type in
  * the wrong signature.
  */
+#define ACPI_SIG_ERDT           "ERDT"      /* Enhanced Resource Director Technology */
 #define ACPI_SIG_MRRM           "MRRM"      /* Memory Range and Region Mapping table */
 #define ACPI_SIG_SLIC           "SLIC"      /* Software Licensing Description Table */
 #define ACPI_SIG_SLIT           "SLIT"      /* System Locality Distance Information Table */
@@ -1085,6 +1086,61 @@ typedef struct acpi_table_mrrm_mem_range_entry {
 /* Values for RegionIdFlags above */
 #define ACPI_MRRM_VALID_REGION_ID_FLAGS_LOCAL   (1<<0)
 #define ACPI_MRRM_VALID_REGION_ID_FLAGS_REMOTE  (1<<1)
+
+/*******************************************************************************
+ *
+ * ERDT - Enhanced Resource Director Technology (ERDT) table
+ *
+ ******************************************************************************/
+
+typedef struct acpi_table_erdt {
+        ACPI_TABLE_HEADER   Header;             /* Common ACPI table header */
+        UINT32              MaxClos;            /* Maximum classes of service */
+        UINT8               Reserved[24];
+        UINT8               Erdt_Substructures[];
+
+} ACPI_TABLE_ERDT;
+
+
+/* Values for subtable type in ACPI_WIDE_HEADER */
+
+enum AcpiErdtType
+{
+    ACPI_ERDT_TYPE_RMDD                 = 0,
+    ACPI_ERDT_TYPE_CACD                 = 1,
+    ACPI_ERDT_TYPE_DACD                 = 2,
+    ACPI_ERDT_TYPE_CMRC                 = 3,
+    ACPI_ERDT_TYPE_MMRC                 = 4,
+    ACPI_ERDT_TYPE_MARC                 = 5,
+    ACPI_ERDT_TYPE_CARC                 = 6,
+    ACPI_ERDT_TYPE_CMRD                 = 7,
+    ACPI_ERDT_TYPE_IBRD                 = 8,
+    ACPI_ERDT_TYPE_IBAD                 = 9,
+    ACPI_ERDT_TYPE_CARD                 = 10,
+    ACPI_ERDT_TYPE_RESERVED             = 11    /* 11 and above are reserved */
+
+};
+
+/*******************************************************************************
+ *
+ * RMDD - Resource Management Domain Description (RMDD) subtable
+ *
+ ******************************************************************************/
+
+typedef struct acpi_table_erdt_rmdd {
+        ACPI_WIDE_HEADER    Header;
+        UINT16              Flags;
+        UINT16              IO_l3_Slices;       /* Number of slices in IO cache */
+        UINT8               IO_l3_Sets;         /* Number of sets in IO cache */
+        UINT8               IO_l3_Ways;         /* Number of ways in IO cache */
+	UINT64              Reserved;
+        UINT16              DomainId;           /* Unique domain ID */
+        UINT32              MaxRmid;            /* Maximun RMID supported */
+        UINT64              CregBase;           /* Control Register Base Address */
+        UINT16              CregSize;           /* Control Register Size (4K pages) */
+        UINT8               RmddStructs[];
+} ACPI_TABLE_ERDT_RMDD;
+
 
 /* Reset to default packing */
 
