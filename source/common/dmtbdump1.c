@@ -1735,8 +1735,10 @@ AcpiDmDumpErdt (
     ACPI_TABLE_HEADER       *Table)
 {
     ACPI_STATUS             Status;
-    ACPI_WIDE_HEADER        *Subtable;
+    ACPI_WIDE_HEADER        *Subtable, *Subsubtable;
     UINT32                  Offset = sizeof (ACPI_TABLE_ERDT);
+    UINT32                  Suboffset;
+    ACPI_DMTABLE_INFO       *InfoTable;
 
     /* Main table */
 
@@ -1751,6 +1753,13 @@ AcpiDmDumpErdt (
     Subtable = ACPI_ADD_PTR (ACPI_WIDE_HEADER, Table, Offset);
     while (Offset < Table->Length)
     {
+	/* First level subtables must be RMDD */
+	if (Subtable->Type != ACPI_ERDT_TYPE_RMDD)
+        {
+            AcpiOsPrintf ("Non-RMDD subtable (type=%d)\n", Subtable->Type);
+            return;
+        }
+
 	/* Dump common header */
         AcpiOsPrintf ("\n");
         Status = AcpiDmDumpTable (Table->Length, Offset, Subtable,
@@ -1768,6 +1777,75 @@ AcpiDmDumpErdt (
             return;
         }
 
+        /* Subtables of this RMDD table */
+        Suboffset = Offset + sizeof(ACPI_TABLE_ERDT_RMDD);
+	Subsubtable = ACPI_ADD_PTR (ACPI_WIDE_HEADER, Table, Suboffset);
+	while (Suboffset < Offset + Subtable->Length)
+        {
+            AcpiOsPrintf ("\n");
+
+            switch (Subsubtable->Type)
+            {
+            case ACPI_ERDT_TYPE_CACD:
+                 InfoTable = AcpiDmTableInfoErdtCacd;
+                 break;
+            case ACPI_ERDT_TYPE_DACD:
+                 InfoTable = AcpiDmTableInfoErdtDacd;
+                 break;
+            case ACPI_ERDT_TYPE_CMRC:
+                 InfoTable = AcpiDmTableInfoErdtCmrc;
+                 break;
+            case ACPI_ERDT_TYPE_MMRC:
+                 InfoTable = AcpiDmTableInfoErdtMmrc;
+                 break;
+            case ACPI_ERDT_TYPE_MARC:
+                 InfoTable = AcpiDmTableInfoErdtMarc;
+                 break;
+            case ACPI_ERDT_TYPE_CARC:
+                 InfoTable = AcpiDmTableInfoErdtCarc;
+                 break;
+            case ACPI_ERDT_TYPE_CMRD:
+                 InfoTable = AcpiDmTableInfoErdtCmrd;
+                 break;
+            case ACPI_ERDT_TYPE_IBRD:
+                 InfoTable = AcpiDmTableInfoErdtIbrd;
+                 break;
+            case ACPI_ERDT_TYPE_IBAD:
+                 InfoTable = AcpiDmTableInfoErdtIbad;
+                 break;
+            case ACPI_ERDT_TYPE_CARD:
+                 InfoTable = AcpiDmTableInfoErdtCard;
+                 break;
+            default:
+                AcpiOsPrintf ("\n**** Unknown RMDD subtable type 0x%X\n",
+                    Subsubtable->Type);
+    
+                /* Attempt to continue */
+    
+                if (!Subsubtable->Length)
+                {
+                    AcpiOsPrintf ("Invalid zero length subtable\n");
+                    return;
+                }
+                goto NextSubsubtable;
+            }
+
+            Status = AcpiDmDumpTable (Table->Length, Offset, Subsubtable,
+                Subsubtable->Length, AcpiDmTableInfoErdtHdr);
+            if (ACPI_FAILURE (Status))
+            {
+                return;
+            }
+            Status = AcpiDmDumpTable (Table->Length, Suboffset, Subsubtable,
+                Subsubtable->Length, InfoTable);
+            if (ACPI_FAILURE (Status))
+            {
+                return;
+            }
+NextSubsubtable:
+            Suboffset += Subsubtable->Length;
+            Subsubtable = ACPI_ADD_PTR (ACPI_WIDE_HEADER, Table, Suboffset);
+        }
         /* Point to next subtable */
 
         Offset += Subtable->Length;

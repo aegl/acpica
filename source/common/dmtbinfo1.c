@@ -1237,6 +1237,127 @@ ACPI_DMTABLE_INFO           AcpiDmTableInfoErdtRmdd[] =
 
 /*******************************************************************************
  *
+ * RMDD - CACD CPU Agent Collection Description subtable
+ *
+ ******************************************************************************/
+
+ACPI_DMTABLE_INFO           AcpiDmTableInfoErdtCacd[] =
+{
+    {ACPI_DMT_UINT16,   ACPI_ERDT_CACD_OFFSET (DomainId),                "Domain ID", 0},
+    ACPI_DMT_TERMINATOR
+};
+
+
+/*******************************************************************************
+ *
+ * RMDD - DACD Device Agent Collection Description subtable
+ *
+ ******************************************************************************/
+
+ACPI_DMTABLE_INFO           AcpiDmTableInfoErdtDacd[] =
+{
+    ACPI_DMT_TERMINATOR
+};
+
+
+/*******************************************************************************
+ *
+ * RMDD - Cache Monitoring Registers for CPU Agents subtable
+ *
+ ******************************************************************************/
+
+ACPI_DMTABLE_INFO           AcpiDmTableInfoErdtCmrc[] =
+{
+    ACPI_DMT_TERMINATOR
+};
+
+
+/*******************************************************************************
+ *
+ * RMDD - Memory-bandwidth Monitoring Registers for CPU agents subtable
+ *
+ ******************************************************************************/
+
+ACPI_DMTABLE_INFO           AcpiDmTableInfoErdtMmrc[] =
+{
+    ACPI_DMT_TERMINATOR
+};
+
+
+/*******************************************************************************
+ *
+ * RMDD - Memory-bandwidth Allocation Registers for CPU agents subtable
+ *
+ ******************************************************************************/
+
+ACPI_DMTABLE_INFO           AcpiDmTableInfoErdtMarc[] =
+{
+    ACPI_DMT_TERMINATOR
+};
+
+
+/*******************************************************************************
+ *
+ * RMDD - Cache Allocation Registers for CPU Agents subtable
+ *
+ ******************************************************************************/
+
+ACPI_DMTABLE_INFO           AcpiDmTableInfoErdtCarc[] =
+{
+    ACPI_DMT_TERMINATOR
+};
+
+
+/*******************************************************************************
+ *
+ * RMDD - Cache Monitoring Registers for Device Agents subtable
+ *
+ ******************************************************************************/
+
+ACPI_DMTABLE_INFO           AcpiDmTableInfoErdtCmrd[] =
+{
+    ACPI_DMT_TERMINATOR
+};
+
+
+/*******************************************************************************
+ *
+ * RMDD - O Bandwidth Monitoring Registers for Device Agents subtable
+ *
+ ******************************************************************************/
+
+ACPI_DMTABLE_INFO           AcpiDmTableInfoErdtIbrd[] =
+{
+    ACPI_DMT_TERMINATOR
+};
+
+
+/*******************************************************************************
+ *
+ * RMDD - O bandwidth Allocation Registers for Device Agents subtable
+ *
+ ******************************************************************************/
+
+ACPI_DMTABLE_INFO           AcpiDmTableInfoErdtIbad[] =
+{
+    ACPI_DMT_TERMINATOR
+};
+
+
+/*******************************************************************************
+ *
+ * RMDD - Cache Allocation Registers for Device Agents subtable
+ *
+ ******************************************************************************/
+
+ACPI_DMTABLE_INFO           AcpiDmTableInfoErdtCard[] =
+{
+    ACPI_DMT_TERMINATOR
+};
+
+
+/*******************************************************************************
+ *
  * ERST - Error Record Serialization table
  *
  ******************************************************************************/

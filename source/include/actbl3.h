@@ -1142,6 +1142,119 @@ typedef struct acpi_table_erdt_rmdd {
 } ACPI_TABLE_ERDT_RMDD;
 
 
+/*******************************************************************************
+ *
+ * RMDD - CPU Agent Collection Description (CACD) subtable
+ *
+ ******************************************************************************/
+
+typedef struct acpi_table_erdt_cacd {
+        ACPI_WIDE_HEADER    Header;
+	UINT16              Reserved;
+        UINT16              DomainId;           /* Unique domain ID */
+        UINT32              X2APICIDS[];
+} ACPI_TABLE_ERDT_CACD;
+
+
+/*******************************************************************************
+ *
+ * RMDD - Device Agent Collection Description (DACD) subtable
+ *
+ ******************************************************************************/
+
+typedef struct acpi_table_erdt_dacd {
+        ACPI_WIDE_HEADER    Header;
+} ACPI_TABLE_ERDT_DACD;
+
+
+/*******************************************************************************
+ *
+ * RMDD - Cache Monitoring Registers for CPU Agents (CMRC) subtable
+ *
+ ******************************************************************************/
+
+typedef struct acpi_table_erdt_cmrc {
+        ACPI_WIDE_HEADER    Header;
+} ACPI_TABLE_ERDT_CMRC;
+
+
+/*******************************************************************************
+ *
+ * RMDD - Memory-bandwidth Monitoring Registers for CPU Agents (MMRC) subtable
+ *
+ ******************************************************************************/
+
+typedef struct acpi_table_erdt_mmrc {
+        ACPI_WIDE_HEADER    Header;
+} ACPI_TABLE_ERDT_MMRC;
+
+
+/*******************************************************************************
+ *
+ * RMDD - Memory-bandwidth Allocation Registers for CPU Agents (MARC) subtable
+ *
+ ******************************************************************************/
+
+typedef struct acpi_table_erdt_mxrc {
+        ACPI_WIDE_HEADER    Header;
+} ACPI_TABLE_ERDT_MARC;
+
+
+/*******************************************************************************
+ *
+ * RMDD - Cache Allocation Registers for CPU Agents (CARC) subtable
+ *
+ ******************************************************************************/
+
+typedef struct acpi_table_erdt_carc {
+        ACPI_WIDE_HEADER    Header;
+} ACPI_TABLE_ERDT_CARC;
+
+
+/*******************************************************************************
+ *
+ * RMDD - Cache Monitoring Registers for Device Agents (CMRD) subtable
+ *
+ ******************************************************************************/
+
+typedef struct acpi_table_erdt_cmrd {
+        ACPI_WIDE_HEADER    Header;
+} ACPI_TABLE_ERDT_CMRD;
+
+
+/*******************************************************************************
+ *
+ * RMDD - Cache Monitoring Registers for Device Agents (IBRD) subtable
+ *
+ ******************************************************************************/
+
+typedef struct acpi_table_erdt_ibrd {
+        ACPI_WIDE_HEADER    Header;
+} ACPI_TABLE_ERDT_IBRD;
+
+
+/*******************************************************************************
+ *
+ * RMDD - IO bandwidth Allocation Registers for device agents (IBAD) subtable
+ *
+ ******************************************************************************/
+
+typedef struct acpi_table_erdt_ibad {
+        ACPI_WIDE_HEADER    Header;
+} ACPI_TABLE_ERDT_IBAD;
+
+
+/*******************************************************************************
+ *
+ * RMDD - O bandwidth Allocation Registers for Device Agents (CARD) subtable
+ *
+ ******************************************************************************/
+
+typedef struct acpi_table_erdt_card {
+        ACPI_WIDE_HEADER    Header;
+} ACPI_TABLE_ERDT_CARD;
+
+
 /* Reset to default packing */
 
 #pragma pack()
