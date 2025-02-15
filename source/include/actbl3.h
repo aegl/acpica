@@ -1164,6 +1164,7 @@ typedef struct acpi_table_erdt_cacd {
 
 typedef struct acpi_table_erdt_dacd {
         ACPI_WIDE_HEADER    Header;
+        UINT16              DomainId;           /* Unique domain ID */
 } ACPI_TABLE_ERDT_DACD;
 
 
@@ -1175,6 +1176,15 @@ typedef struct acpi_table_erdt_dacd {
 
 typedef struct acpi_table_erdt_cmrc {
         ACPI_WIDE_HEADER    Header;
+        UINT32              Reserved1;
+        UINT32              Flags;
+        UINT8               IndexFn;
+        UINT8               Reserved[11];
+        UINT64              CmtRegBase;
+        UINT32              CmtRegSize;
+        UINT16              ClumpSize;
+        UINT16              ClumpStride;
+        UINT64              UpScale;
 } ACPI_TABLE_ERDT_CMRC;
 
 

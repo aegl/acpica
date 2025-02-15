@@ -1256,6 +1256,7 @@ ACPI_DMTABLE_INFO           AcpiDmTableInfoErdtCacd[] =
 
 ACPI_DMTABLE_INFO           AcpiDmTableInfoErdtDacd[] =
 {
+    {ACPI_DMT_UINT16,   ACPI_ERDT_DACD_OFFSET (DomainId),                "Domain ID", 0},
     ACPI_DMT_TERMINATOR
 };
 
@@ -1268,6 +1269,13 @@ ACPI_DMTABLE_INFO           AcpiDmTableInfoErdtDacd[] =
 
 ACPI_DMTABLE_INFO           AcpiDmTableInfoErdtCmrc[] =
 {
+    {ACPI_DMT_UINT16,   ACPI_ERDT_CMRC_OFFSET (Flags),                   "Flags", 0},
+    {ACPI_DMT_UINT8,    ACPI_ERDT_CMRC_OFFSET (IndexFn),                 "Register Index Function", 0},
+    {ACPI_DMT_UINT64,   ACPI_ERDT_CMRC_OFFSET (CmtRegBase),              "CMT Register Base Address", 0},
+    {ACPI_DMT_UINT32,   ACPI_ERDT_CMRC_OFFSET (CmtRegSize),              "CMT Register Size", 0},
+    {ACPI_DMT_UINT16,   ACPI_ERDT_CMRC_OFFSET (ClumpSize),               "Clump Size", 0},
+    {ACPI_DMT_UINT16,   ACPI_ERDT_CMRC_OFFSET (ClumpStride),             "Clump Stride", 0},
+    {ACPI_DMT_UINT64,   ACPI_ERDT_CMRC_OFFSET (UpScale),                 "Upscale factor", 0},
     ACPI_DMT_TERMINATOR
 };
 
