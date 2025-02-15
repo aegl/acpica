@@ -1269,6 +1269,21 @@ typedef struct acpi_table_erdt_cmrd {
 
 typedef struct acpi_table_erdt_ibrd {
         ACPI_WIDE_HEADER    Header;
+        UINT32              Reserved1;
+        UINT32              Flags;
+        UINT8               IndexFn;
+        UINT8               Reserved2[11];
+        UINT64              IbrdRegBase;
+        UINT32              IbrdRegSize;
+        UINT16              TotalBwOffset;
+        UINT16              IOMissBwOffset;
+        UINT16              TotalBwClump;
+        UINT16              IOMissBwClump;
+        UINT8               Reserved3[7];
+        UINT8               CounterWidth;
+        UINT64              UpScale;
+        UINT32              CorrFactorListLen;
+        UINT32              CorrFactorList[];
 } ACPI_TABLE_ERDT_IBRD;
 
 

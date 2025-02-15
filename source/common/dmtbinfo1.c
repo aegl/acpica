@@ -1357,6 +1357,17 @@ ACPI_DMTABLE_INFO           AcpiDmTableInfoErdtCmrd[] =
 
 ACPI_DMTABLE_INFO           AcpiDmTableInfoErdtIbrd[] =
 {
+    {ACPI_DMT_UINT32,   ACPI_ERDT_IBRD_OFFSET (Flags),                   "Flags", 0},
+    {ACPI_DMT_UINT8,    ACPI_ERDT_IBRD_OFFSET (IndexFn),                 "Register Index Function", 0},
+    {ACPI_DMT_UINT64,   ACPI_ERDT_IBRD_OFFSET (IbrdRegBase),             "IBRD Register Base Address", 0},
+    {ACPI_DMT_UINT32,   ACPI_ERDT_IBRD_OFFSET (IbrdRegSize),             "IBRD Register Size", 0},
+    {ACPI_DMT_UINT16,   ACPI_ERDT_IBRD_OFFSET (TotalBwOffset),           "TotalBw Offset", 0},
+    {ACPI_DMT_UINT16,   ACPI_ERDT_IBRD_OFFSET (IOMissBwOffset),          "IO Miss Offset", 0},
+    {ACPI_DMT_UINT16,   ACPI_ERDT_IBRD_OFFSET (TotalBwClump),            "TotalBw Clump", 0},
+    {ACPI_DMT_UINT16,   ACPI_ERDT_IBRD_OFFSET (IOMissBwClump),           "IO Miss Clump", 0},
+    {ACPI_DMT_UINT8,    ACPI_ERDT_IBRD_OFFSET (CounterWidth),            "Counter Width", 0},
+    {ACPI_DMT_UINT64,   ACPI_ERDT_IBRD_OFFSET (UpScale),                 "Upscale factor", 0},
+    {ACPI_DMT_UINT32,   ACPI_ERDT_IBRD_OFFSET (CorrFactorListLen),       "Corr Factor List Length", 0},
     ACPI_DMT_TERMINATOR
 };
 
