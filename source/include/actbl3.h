@@ -1133,7 +1133,7 @@ typedef struct acpi_table_erdt_rmdd {
         UINT16              IO_l3_Slices;       /* Number of slices in IO cache */
         UINT8               IO_l3_Sets;         /* Number of sets in IO cache */
         UINT8               IO_l3_Ways;         /* Number of ways in IO cache */
-	UINT64              Reserved;
+        UINT64              Reserved;
         UINT16              DomainId;           /* Unique domain ID */
         UINT32              MaxRmid;            /* Maximun RMID supported */
         UINT64              CregBase;           /* Control Register Base Address */
@@ -1150,7 +1150,7 @@ typedef struct acpi_table_erdt_rmdd {
 
 typedef struct acpi_table_erdt_cacd {
         ACPI_WIDE_HEADER    Header;
-	UINT16              Reserved;
+        UINT16              Reserved;
         UINT16              DomainId;           /* Unique domain ID */
         UINT32              X2APICIDS[];
 } ACPI_TABLE_ERDT_CACD;
@@ -1179,7 +1179,7 @@ typedef struct acpi_table_erdt_cmrc {
         UINT32              Reserved1;
         UINT32              Flags;
         UINT8               IndexFn;
-        UINT8               Reserved[11];
+        UINT8               Reserved2[11];
         UINT64              CmtRegBase;
         UINT32              CmtRegSize;
         UINT16              ClumpSize;
@@ -1196,6 +1196,17 @@ typedef struct acpi_table_erdt_cmrc {
 
 typedef struct acpi_table_erdt_mmrc {
         ACPI_WIDE_HEADER    Header;
+        UINT32              Reserved1;
+        UINT32              Flags;
+        UINT8               IndexFn;
+        UINT8               Reserved2[11];
+        UINT64              MbmRegBase;
+        UINT32              MbmRegSize;
+        UINT8               CounterWidth;
+        UINT64              UpScale;
+        UINT8               Reserved3[7];
+        UINT32              CorrFactorListLen;
+        UINT32              CorrFactorList[];
 } ACPI_TABLE_ERDT_MMRC;
 
 

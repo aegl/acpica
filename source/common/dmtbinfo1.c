@@ -1288,6 +1288,13 @@ ACPI_DMTABLE_INFO           AcpiDmTableInfoErdtCmrc[] =
 
 ACPI_DMTABLE_INFO           AcpiDmTableInfoErdtMmrc[] =
 {
+    {ACPI_DMT_UINT16,   ACPI_ERDT_MMRC_OFFSET (Flags),                   "Flags", 0},
+    {ACPI_DMT_UINT8,    ACPI_ERDT_MMRC_OFFSET (IndexFn),                 "Register Index Function", 0},
+    {ACPI_DMT_UINT64,   ACPI_ERDT_MMRC_OFFSET (MbmRegBase),              "MBM Register Base Address", 0},
+    {ACPI_DMT_UINT32,   ACPI_ERDT_MMRC_OFFSET (MbmRegSize),              "MBM Register Size", 0},
+    {ACPI_DMT_UINT8,    ACPI_ERDT_MMRC_OFFSET (CounterWidth),            "MBM Coounter Width", 0},
+    {ACPI_DMT_UINT64,   ACPI_ERDT_MMRC_OFFSET (UpScale),                 "Upscale factor", 0},
+    {ACPI_DMT_UINT32,   ACPI_ERDT_MMRC_OFFSET (CorrFactorListLen),       "Corr Factor List Length", 0},
     ACPI_DMT_TERMINATOR
 };
 
