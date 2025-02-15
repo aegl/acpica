@@ -1392,6 +1392,14 @@ ACPI_DMTABLE_INFO           AcpiDmTableInfoErdtIbad[] =
 
 ACPI_DMTABLE_INFO           AcpiDmTableInfoErdtCard[] =
 {
+    {ACPI_DMT_UINT32,   ACPI_ERDT_CARD_OFFSET (Flags),                   "Flags", 0},
+    {ACPI_DMT_UINT32,   ACPI_ERDT_CARD_OFFSET (ContentionMask),          "ContentionMask", 0},
+    {ACPI_DMT_UINT8,    ACPI_ERDT_CARD_OFFSET (IndexFn),                 "Register Index Function", 0},
+    {ACPI_DMT_UINT64,   ACPI_ERDT_CARD_OFFSET (CardRegBase),             "CARD Register Base Address", 0},
+    {ACPI_DMT_UINT32,   ACPI_ERDT_CARD_OFFSET (CardRegSize),             "CARD Register Size", 0},
+    {ACPI_DMT_UINT16,   ACPI_ERDT_CARD_OFFSET (CatRegOffset),            "CARD Register Offset", 0},
+    {ACPI_DMT_UINT16,   ACPI_ERDT_CARD_OFFSET (CatRegBlockSize),         "CARD Register Block Size", 0},
+
     ACPI_DMT_TERMINATOR
 };
 

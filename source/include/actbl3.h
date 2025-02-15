@@ -1306,6 +1306,15 @@ typedef struct acpi_table_erdt_ibad {
 
 typedef struct acpi_table_erdt_card {
         ACPI_WIDE_HEADER    Header;
+        UINT32              Reserved1;
+        UINT32              Flags;
+        UINT32              ContentionMask;
+        UINT8               IndexFn;
+        UINT8               Reserved2[7];
+        UINT64              CardRegBase;
+        UINT32              CardRegSize;
+        UINT16              CatRegOffset;
+        UINT16              CatRegBlockSize;
 } ACPI_TABLE_ERDT_CARD;
 
 
