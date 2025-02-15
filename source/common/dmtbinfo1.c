@@ -1292,7 +1292,7 @@ ACPI_DMTABLE_INFO           AcpiDmTableInfoErdtMmrc[] =
     {ACPI_DMT_UINT8,    ACPI_ERDT_MMRC_OFFSET (IndexFn),                 "Register Index Function", 0},
     {ACPI_DMT_UINT64,   ACPI_ERDT_MMRC_OFFSET (MbmRegBase),              "MBM Register Base Address", 0},
     {ACPI_DMT_UINT32,   ACPI_ERDT_MMRC_OFFSET (MbmRegSize),              "MBM Register Size", 0},
-    {ACPI_DMT_UINT8,    ACPI_ERDT_MMRC_OFFSET (CounterWidth),            "MBM Coounter Width", 0},
+    {ACPI_DMT_UINT8,    ACPI_ERDT_MMRC_OFFSET (CounterWidth),            "MBM Counter Width", 0},
     {ACPI_DMT_UINT64,   ACPI_ERDT_MMRC_OFFSET (UpScale),                 "Upscale factor", 0},
     {ACPI_DMT_UINT32,   ACPI_ERDT_MMRC_OFFSET (CorrFactorListLen),       "Corr Factor List Length", 0},
     ACPI_DMT_TERMINATOR
@@ -1307,6 +1307,13 @@ ACPI_DMTABLE_INFO           AcpiDmTableInfoErdtMmrc[] =
 
 ACPI_DMTABLE_INFO           AcpiDmTableInfoErdtMarc[] =
 {
+    {ACPI_DMT_UINT16,   ACPI_ERDT_MARC_OFFSET (Flags),                   "Flags", 0},
+    {ACPI_DMT_UINT8,    ACPI_ERDT_MARC_OFFSET (IndexFn),                 "Register Index Function", 0},
+    {ACPI_DMT_UINT64,   ACPI_ERDT_MARC_OFFSET (MbaOptRegBase),           "MBM Register Opt Base Address", 0},
+    {ACPI_DMT_UINT64,   ACPI_ERDT_MARC_OFFSET (MbaMinRegBase),           "MBM Register Min Base Address", 0},
+    {ACPI_DMT_UINT64,   ACPI_ERDT_MARC_OFFSET (MbaMaxRegBase),           "MBM Register Max Base Address", 0},
+    {ACPI_DMT_UINT32,   ACPI_ERDT_MARC_OFFSET (MbaRegSize),              "MBM Register Size", 0},
+    {ACPI_DMT_UINT8,    ACPI_ERDT_MARC_OFFSET (MbaCtrlRange),            "MBM Control Range", 0},
     ACPI_DMT_TERMINATOR
 };
 

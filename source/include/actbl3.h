@@ -1216,8 +1216,17 @@ typedef struct acpi_table_erdt_mmrc {
  *
  ******************************************************************************/
 
-typedef struct acpi_table_erdt_mxrc {
+typedef struct acpi_table_erdt_marc {
         ACPI_WIDE_HEADER    Header;
+        UINT16              Reserved1;
+        UINT16              Flags;
+        UINT8               IndexFn;
+        UINT8               Reserved2[7];
+        UINT64              MbaOptRegBase;
+        UINT64              MbaMinRegBase;
+        UINT64              MbaMaxRegBase;
+        UINT32              MbaRegSize;
+        UINT32              MbaCtrlRange;
 } ACPI_TABLE_ERDT_MARC;
 
 
