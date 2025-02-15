@@ -1249,6 +1249,15 @@ typedef struct acpi_table_erdt_carc {
 
 typedef struct acpi_table_erdt_cmrd {
         ACPI_WIDE_HEADER    Header;
+        UINT32              Reserved1;
+        UINT32              Flags;
+        UINT8               IndexFn;
+        UINT8               Reserved2[11];
+        UINT64              CmdRegBase;
+        UINT32              CmdRegSize;
+	UINT16              CmtRegOff;
+        UINT16              CmtClumpSize;
+	UINT64              UpScale;
 } ACPI_TABLE_ERDT_CMRD;
 
 

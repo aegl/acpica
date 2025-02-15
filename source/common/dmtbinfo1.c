@@ -1338,6 +1338,13 @@ ACPI_DMTABLE_INFO           AcpiDmTableInfoErdtCarc[] =
 
 ACPI_DMTABLE_INFO           AcpiDmTableInfoErdtCmrd[] =
 {
+    {ACPI_DMT_UINT32,   ACPI_ERDT_CMRD_OFFSET (Flags),                   "Flags", 0},
+    {ACPI_DMT_UINT8,    ACPI_ERDT_CMRD_OFFSET (IndexFn),                 "Register Index Function", 0},
+    {ACPI_DMT_UINT64,   ACPI_ERDT_CMRD_OFFSET (CmdRegBase),              "CMRD Register Base Address", 0},
+    {ACPI_DMT_UINT32,   ACPI_ERDT_CMRD_OFFSET (CmdRegSize),              "CMRD Register Size", 0},
+    {ACPI_DMT_UINT16,   ACPI_ERDT_CMRD_OFFSET (CmtRegOff),               "Register Offset", 0},
+    {ACPI_DMT_UINT16,   ACPI_ERDT_CMRD_OFFSET (CmtClumpSize),            "Clump Size", 0},
+    {ACPI_DMT_UINT64,   ACPI_ERDT_CMRD_OFFSET (UpScale),                 "Upscale factor", 0},
     ACPI_DMT_TERMINATOR
 };
 
