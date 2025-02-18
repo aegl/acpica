@@ -1736,9 +1736,13 @@ AcpiDmDumpErdt (
 {
     ACPI_STATUS             Status;
     ACPI_WIDE_HEADER        *Subtable, *Subsubtable;
+    ACPI_TABLE_ERDT_DACD_DASE *ScopeTable;
     UINT32                  Offset = sizeof (ACPI_TABLE_ERDT);
     UINT32                  Suboffset;
-    ACPI_DMTABLE_INFO       *InfoTable;
+    UINT32                  ScopeOffset;
+    UINT16                  SubsubtableLength;
+    ACPI_DMTABLE_INFO       *InfoTable, *TrailEntries, *DacdEntries;
+    UINT32                  n;
 
     /* Main table */
 
@@ -1784,19 +1788,27 @@ AcpiDmDumpErdt (
         {
             AcpiOsPrintf ("\n");
 
+            TrailEntries = NULL;
+            DacdEntries = NULL;
             switch (Subsubtable->Type)
             {
             case ACPI_ERDT_TYPE_CACD:
                  InfoTable = AcpiDmTableInfoErdtCacd;
+                 TrailEntries = AcpiDmTableInfoErdtCacdX2apic;
+                 SubsubtableLength = sizeof(ACPI_TABLE_ERDT_CACD);
                  break;
             case ACPI_ERDT_TYPE_DACD:
                  InfoTable = AcpiDmTableInfoErdtDacd;
+                 DacdEntries = AcpiDmTableInfoErdtDacdScope;
+                 SubsubtableLength = sizeof(ACPI_TABLE_ERDT_DACD);
                  break;
             case ACPI_ERDT_TYPE_CMRC:
                  InfoTable = AcpiDmTableInfoErdtCmrc;
                  break;
             case ACPI_ERDT_TYPE_MMRC:
                  InfoTable = AcpiDmTableInfoErdtMmrc;
+                 TrailEntries = AcpiDmTableInfoErdtMmrcCorrFactor;
+                 SubsubtableLength = sizeof(ACPI_TABLE_ERDT_MMRC);
                  break;
             case ACPI_ERDT_TYPE_MARC:
                  InfoTable = AcpiDmTableInfoErdtMarc;
@@ -1809,6 +1821,8 @@ AcpiDmDumpErdt (
                  break;
             case ACPI_ERDT_TYPE_IBRD:
                  InfoTable = AcpiDmTableInfoErdtIbrd;
+                 TrailEntries = AcpiDmTableInfoErdtIbrdCorrFactor;
+                 SubsubtableLength = sizeof(ACPI_TABLE_ERDT_IBRD);
                  break;
             case ACPI_ERDT_TYPE_IBAD:
                  InfoTable = AcpiDmTableInfoErdtIbad;
@@ -1841,6 +1855,43 @@ AcpiDmDumpErdt (
             if (ACPI_FAILURE (Status))
             {
                 return;
+            }
+            if (TrailEntries)
+            {
+                for (n = 0; n < Subsubtable->Length - SubsubtableLength; n += sizeof(UINT32))
+                {
+                    Status = AcpiDmDumpTable (Table->Length, Suboffset,
+                        ACPI_ADD_PTR (ACPI_WIDE_HEADER, Subsubtable, SubsubtableLength + n),
+                        sizeof(UINT32), TrailEntries);
+                    if (ACPI_FAILURE (Status))
+                    {
+                        return;
+                    }
+                }
+            }
+            if (DacdEntries) {
+                 ScopeOffset = Suboffset + SubsubtableLength;
+                 ScopeTable = ACPI_ADD_PTR (ACPI_TABLE_ERDT_DACD_DASE, Subsubtable,
+                     SubsubtableLength);
+                 while (ScopeOffset < Suboffset + Subsubtable->Length)
+                 {
+                     AcpiOsPrintf ("\n");
+                     Status = AcpiDmDumpTable (Table->Length, Suboffset,
+                         ScopeTable, ScopeTable->Length, DacdEntries);
+                     if (ACPI_FAILURE (Status))
+                     {
+                         return;
+                     }
+                     AcpiOsPrintf ("[%04ld]                               Path :",
+                         ScopeTable->Length - sizeof(ACPI_TABLE_ERDT_DACD_DASE));
+                     for (n = 0; n < ScopeTable->Length - sizeof(ACPI_TABLE_ERDT_DACD_DASE); n++)
+                     {
+                         AcpiOsPrintf (" %.2x", ScopeTable->Path[n]);
+                     }
+                     AcpiOsPrintf ("\n");
+                     ScopeOffset += ScopeTable->Length;
+                     ScopeTable = ACPI_ADD_PTR (ACPI_TABLE_ERDT_DACD_DASE, ScopeTable, ScopeTable->Length);
+                 }
             }
 NextSubsubtable:
             Suboffset += Subsubtable->Length;

@@ -1164,8 +1164,18 @@ typedef struct acpi_table_erdt_cacd {
 
 typedef struct acpi_table_erdt_dacd {
         ACPI_WIDE_HEADER    Header;
+        UINT16              Reserved;
         UINT16              DomainId;           /* Unique domain ID */
 } ACPI_TABLE_ERDT_DACD;
+
+typedef struct acpi_table_erdt_dacd_dase {
+	UINT8               Type;
+        UINT8               Length;
+        UINT16              Segment;
+        UINT8               Reserved;
+        UINT8               StartBus;
+        UINT8               Path[];
+} ACPI_TABLE_ERDT_DACD_DASE;
 
 
 /*******************************************************************************

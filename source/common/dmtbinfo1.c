@@ -1247,6 +1247,12 @@ ACPI_DMTABLE_INFO           AcpiDmTableInfoErdtCacd[] =
     ACPI_DMT_TERMINATOR
 };
 
+ACPI_DMTABLE_INFO           AcpiDmTableInfoErdtCacdX2apic[] =
+{
+    {ACPI_DMT_UINT32,   0,                                               "X2ApicID", DT_OPTIONAL},
+    ACPI_DMT_TERMINATOR
+};
+
 
 /*******************************************************************************
  *
@@ -1257,6 +1263,14 @@ ACPI_DMTABLE_INFO           AcpiDmTableInfoErdtCacd[] =
 ACPI_DMTABLE_INFO           AcpiDmTableInfoErdtDacd[] =
 {
     {ACPI_DMT_UINT16,   ACPI_ERDT_DACD_OFFSET (DomainId),                "Domain ID", 0},
+    ACPI_DMT_TERMINATOR
+};
+
+ACPI_DMTABLE_INFO           AcpiDmTableInfoErdtDacdScope[] =
+{
+    {ACPI_DMT_UINT8,    ACPI_ERDT_DACD_DASE_OFFSET (Type),               "Type", DT_OPTIONAL},
+    {ACPI_DMT_UINT8,    ACPI_ERDT_DACD_DASE_OFFSET (Segment),            "Segment", DT_OPTIONAL},
+    {ACPI_DMT_UINT8,    ACPI_ERDT_DACD_DASE_OFFSET (StartBus),           "StartBus", DT_OPTIONAL},
     ACPI_DMT_TERMINATOR
 };
 
@@ -1295,6 +1309,12 @@ ACPI_DMTABLE_INFO           AcpiDmTableInfoErdtMmrc[] =
     {ACPI_DMT_UINT8,    ACPI_ERDT_MMRC_OFFSET (CounterWidth),            "MBM Counter Width", 0},
     {ACPI_DMT_UINT64,   ACPI_ERDT_MMRC_OFFSET (UpScale),                 "Upscale factor", 0},
     {ACPI_DMT_UINT32,   ACPI_ERDT_MMRC_OFFSET (CorrFactorListLen),       "Corr Factor List Length", 0},
+    ACPI_DMT_TERMINATOR
+};
+
+ACPI_DMTABLE_INFO           AcpiDmTableInfoErdtMmrcCorrFactor[] =
+{
+    {ACPI_DMT_UINT32,   0,                                               "CorrFactor", DT_OPTIONAL},
     ACPI_DMT_TERMINATOR
 };
 
@@ -1368,6 +1388,12 @@ ACPI_DMTABLE_INFO           AcpiDmTableInfoErdtIbrd[] =
     {ACPI_DMT_UINT8,    ACPI_ERDT_IBRD_OFFSET (CounterWidth),            "Counter Width", 0},
     {ACPI_DMT_UINT64,   ACPI_ERDT_IBRD_OFFSET (UpScale),                 "Upscale factor", 0},
     {ACPI_DMT_UINT32,   ACPI_ERDT_IBRD_OFFSET (CorrFactorListLen),       "Corr Factor List Length", 0},
+    ACPI_DMT_TERMINATOR
+};
+
+ACPI_DMTABLE_INFO           AcpiDmTableInfoErdtIbrdCorrFactor[] =
+{
+    {ACPI_DMT_UINT32,   0,                                               "CorrFactor", DT_OPTIONAL},
     ACPI_DMT_TERMINATOR
 };
 
