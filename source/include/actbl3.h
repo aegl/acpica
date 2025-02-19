@@ -1199,8 +1199,8 @@ typedef struct acpi_table_erdt_mmrc {
         UINT32              Flags;
         UINT8               IndexFn;
         UINT8               Reserved2[11];
-        UINT64              MbmRegBase;
-        UINT32              MbmRegSize;
+        UINT64              RegBase;
+        UINT32              RegSize;
         UINT8               CounterWidth;
         UINT64              UpScale;
         UINT8               Reserved3[7];
@@ -1221,9 +1221,9 @@ typedef struct acpi_table_erdt_marc {
         UINT16              Flags;
         UINT8               IndexFn;
         UINT8               Reserved2[7];
-        UINT64              MbaOptRegBase;
-        UINT64              MbaMinRegBase;
-        UINT64              MbaMaxRegBase;
+        UINT64              RegBaseOpt;
+        UINT64              RegBaseMin;
+        UINT64              RegBaseMax;
         UINT32              MbaRegSize;
         UINT32              MbaCtrlRange;
 } ACPI_TABLE_ERDT_MARC;
@@ -1252,8 +1252,8 @@ typedef struct acpi_table_erdt_cmrd {
         UINT32              Flags;
         UINT8               IndexFn;
         UINT8               Reserved2[11];
-        UINT64              CmdRegBase;
-        UINT32              CmdRegSize;
+        UINT64              RegBase;
+        UINT32              RegSize;
 	UINT16              CmtRegOff;
         UINT16              CmtClumpSize;
 	UINT64              UpScale;
@@ -1272,8 +1272,8 @@ typedef struct acpi_table_erdt_ibrd {
         UINT32              Flags;
         UINT8               IndexFn;
         UINT8               Reserved2[11];
-        UINT64              IbrdRegBase;
-        UINT32              IbrdRegSize;
+        UINT64              RegBase;
+        UINT32              RegSize;
         UINT16              TotalBwOffset;
         UINT16              IOMissBwOffset;
         UINT16              TotalBwClump;
@@ -1310,8 +1310,8 @@ typedef struct acpi_table_erdt_card {
         UINT32              ContentionMask;
         UINT8               IndexFn;
         UINT8               Reserved2[7];
-        UINT64              CardRegBase;
-        UINT32              CardRegSize;
+        UINT64              RegBase;
+        UINT32              RegSize;
         UINT16              CatRegOffset;
         UINT16              CatRegBlockSize;
 } ACPI_TABLE_ERDT_CARD;
