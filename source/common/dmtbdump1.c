@@ -1882,13 +1882,18 @@ AcpiDmDumpErdt (
                      {
                          return;
                      }
-                     AcpiOsPrintf ("[%04ld]                               Path :",
-                         ScopeTable->Length - sizeof(ACPI_TABLE_ERDT_DACD_DASE));
+
                      for (n = 0; n < ScopeTable->Length - sizeof(ACPI_TABLE_ERDT_DACD_DASE); n++)
                      {
-                         AcpiOsPrintf (" %.2x", ScopeTable->Path[n]);
+                         Status = AcpiDmDumpTable (Table->Length, Suboffset,
+                             ACPI_ADD_PTR (ACPI_WIDE_HEADER, ScopeTable, sizeof(*ScopeTable) + n),
+                             sizeof(UINT32), AcpiDmTableInfoErdtDacdPath);
+                         if (ACPI_FAILURE (Status))
+                         {
+                             return;
+                         }
                      }
-                     AcpiOsPrintf ("\n");
+
                      ScopeOffset += ScopeTable->Length;
                      ScopeTable = ACPI_ADD_PTR (ACPI_TABLE_ERDT_DACD_DASE, ScopeTable, ScopeTable->Length);
                  }

@@ -1268,9 +1268,15 @@ ACPI_DMTABLE_INFO           AcpiDmTableInfoErdtDacd[] =
 
 ACPI_DMTABLE_INFO           AcpiDmTableInfoErdtDacdScope[] =
 {
-    {ACPI_DMT_UINT8,    ACPI_ERDT_DACD_DASE_OFFSET (Type),               "Type", DT_OPTIONAL},
+    {ACPI_DMT_UINT8,    ACPI_ERDT_DACD_DASE_OFFSET (Type),               "PCIType", DT_OPTIONAL},
     {ACPI_DMT_UINT8,    ACPI_ERDT_DACD_DASE_OFFSET (Segment),            "Segment", DT_OPTIONAL},
     {ACPI_DMT_UINT8,    ACPI_ERDT_DACD_DASE_OFFSET (StartBus),           "StartBus", DT_OPTIONAL},
+    ACPI_DMT_TERMINATOR
+};
+
+ACPI_DMTABLE_INFO           AcpiDmTableInfoErdtDacdPath[] =
+{
+    {ACPI_DMT_UINT8,    0,                                               "Path", DT_OPTIONAL},
     ACPI_DMT_TERMINATOR
 };
 

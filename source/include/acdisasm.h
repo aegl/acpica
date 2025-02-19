@@ -471,6 +471,7 @@ extern ACPI_DMTABLE_INFO        AcpiDmTableInfoErdtCard[];
 extern ACPI_DMTABLE_INFO        AcpiDmTableInfoErdtCmrc[];
 extern ACPI_DMTABLE_INFO        AcpiDmTableInfoErdtCmrd[];
 extern ACPI_DMTABLE_INFO        AcpiDmTableInfoErdtDacd[];
+extern ACPI_DMTABLE_INFO        AcpiDmTableInfoErdtDacdPath[];
 extern ACPI_DMTABLE_INFO        AcpiDmTableInfoErdtDacdScope[];
 extern ACPI_DMTABLE_INFO        AcpiDmTableInfoErdtIbad[];
 extern ACPI_DMTABLE_INFO        AcpiDmTableInfoErdtIbrd[];
