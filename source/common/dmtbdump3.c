@@ -177,7 +177,7 @@ AcpiDmDumpMrrm (
     ACPI_TABLE_HEADER       *Table)
 {
     ACPI_STATUS             Status;
-    ACPI_TABLE_MRRM_SUBTABLE_HEADER    *Subtable;
+    ACPI_WIDE_HEADER        *Subtable;
     UINT16                  Offset = sizeof (ACPI_TABLE_MRRM);
 
     Status = AcpiDmDumpTable (Table->Length, 0, Table, 0, AcpiDmTableInfoMrrm);
@@ -186,7 +186,7 @@ AcpiDmDumpMrrm (
         return;
     }
 
-    Subtable = ACPI_ADD_PTR (ACPI_TABLE_MRRM_SUBTABLE_HEADER, Table, Offset);
+    Subtable = ACPI_ADD_PTR (ACPI_WIDE_HEADER, Table, Offset);
     while (Offset < Table->Length)
     {
         AcpiOsPrintf ("\n");
@@ -205,7 +205,7 @@ AcpiDmDumpMrrm (
         }
 
         Offset += Subtable->Length;
-        Subtable = ACPI_ADD_PTR (ACPI_TABLE_MRRM_SUBTABLE_HEADER, Subtable,
+        Subtable = ACPI_ADD_PTR (ACPI_WIDE_HEADER, Subtable,
            Subtable->Length);
     }
 }

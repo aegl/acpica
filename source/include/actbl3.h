@@ -1055,23 +1055,12 @@ typedef struct acpi_table_mrrm {
 
 /*******************************************************************************
  *
- * Memory Range Subtable Header
- *
- ******************************************************************************/
-
-typedef struct acpi_table_mrrm_subtable_header {
-        UINT16              Type;               /* Type 0="MRRM" */
-        UINT16              Length;             /* Length */
-} ACPI_TABLE_MRRM_SUBTABLE_HEADER;
-
-/*******************************************************************************
- *
  * Memory Range entry - Memory Range entry in MRRM table
  *
  ******************************************************************************/
 
 typedef struct acpi_table_mrrm_mem_range_entry {
-        ACPI_TABLE_MRRM_SUBTABLE_HEADER Header;
+        ACPI_WIDE_HEADER    Header;
         UINT32              Reserved;           /* Reserved */
         UINT64              AddrBase;           /* Base addr of the mem range */
         UINT64              AddrLen;            /* Length of the mem range */
