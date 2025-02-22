@@ -1339,6 +1339,38 @@ ACPI_DMTABLE_INFO           AcpiDmTableInfoMpam2[] =
 
 /*******************************************************************************
  *
+ * MRRM - Memory Range and Region Mapping Table
+ *
+ ******************************************************************************/
+
+ACPI_DMTABLE_INFO           AcpiDmTableInfoMrrm[] =
+{
+    {ACPI_DMT_UINT8,    ACPI_MRRM_OFFSET (MaxMemRegion),            "Max Memory Regions", 0},
+    {ACPI_DMT_UINT8,    ACPI_MRRM_OFFSET (Flags),                   "Region Assignment Type", 0},
+    {ACPI_DMT_UINT8,    ACPI_MRRM_OFFSET (Reserved1),               "Reserved", 0},
+    ACPI_DMT_TERMINATOR
+};
+
+/* MRRM Subtable */
+
+/* 0: Memory Range entry */
+
+ACPI_DMTABLE_INFO           AcpiDmTableInfoMrrm0[] =
+{
+    {ACPI_DMT_UINT16,   ACPI_MRRM0_OFFSET (Header.Type),            "Subtable Type", 0},
+    {ACPI_DMT_UINT16,   ACPI_MRRM0_OFFSET (Header.Length),          "Length", DT_LENGTH},
+    {ACPI_DMT_UINT64,   ACPI_MRRM0_OFFSET (AddrBase),               "MMIO Address Base", 0},
+    {ACPI_DMT_UINT64,   ACPI_MRRM0_OFFSET (AddrLen),                "MMIO Address Length", 0},
+    {ACPI_DMT_UINT16,   ACPI_MRRM0_OFFSET (RegionIdFlags),          "Region Valid Flags", 0},
+    {ACPI_DMT_UINT8,    ACPI_MRRM0_OFFSET (AddrBase),               "Static Local Region ID", 0},
+    {ACPI_DMT_UINT8,    ACPI_MRRM0_OFFSET (AddrBase),               "Static Remote Region ID", 0},
+    {ACPI_DMT_UINT32,   ACPI_MRRM0_OFFSET (Reserved1),              "Reserved", 0},
+    ACPI_DMT_TERMINATOR
+};
+
+
+/*******************************************************************************
+ *
  * MPST - Memory Power State Table
  *
  ******************************************************************************/
