@@ -173,6 +173,7 @@
 #define ACPI_SIG_BDAT           "BDAT"      /* BIOS Data ACPI Table */
 #define ACPI_SIG_CCEL           "CCEL"      /* CC Event Log Table */
 #define ACPI_SIG_CDAT           "CDAT"      /* Coherent Device Attribute Table */
+#define ACPI_SIG_ERDT           "ERDT"      /* Enhanced Resource Director Technology */
 #define ACPI_SIG_IORT           "IORT"      /* IO Remapping Table */
 #define ACPI_SIG_IVRS           "IVRS"      /* I/O Virtualization Reporting Structure */
 #define ACPI_SIG_LPIT           "LPIT"      /* Low Power Idle Table */
@@ -639,6 +640,247 @@ typedef struct acpi_table_ccel
     UINT64                  LogAreaStartAddress;
 
 } ACPI_TABLE_CCEL;
+
+/*******************************************************************************
+ *
+ * ERDT - Enhanced Resource Director Technology (ERDT) table
+ *
+ ******************************************************************************/
+
+typedef struct acpi_table_erdt {
+        ACPI_TABLE_HEADER   Header;             /* Common ACPI table header */
+        UINT32              MaxClos;            /* Maximum classes of service */
+        UINT8               Reserved[24];
+        UINT8               Erdt_Substructures[];
+
+} ACPI_TABLE_ERDT;
+
+
+/* Values for subtable type in ACPI_SUBTABLE_HEADER_16 */
+
+enum AcpiErdtType
+{
+    ACPI_ERDT_TYPE_RMDD                 = 0,
+    ACPI_ERDT_TYPE_CACD                 = 1,
+    ACPI_ERDT_TYPE_DACD                 = 2,
+    ACPI_ERDT_TYPE_CMRC                 = 3,
+    ACPI_ERDT_TYPE_MMRC                 = 4,
+    ACPI_ERDT_TYPE_MARC                 = 5,
+    ACPI_ERDT_TYPE_CARC                 = 6,
+    ACPI_ERDT_TYPE_CMRD                 = 7,
+    ACPI_ERDT_TYPE_IBRD                 = 8,
+    ACPI_ERDT_TYPE_IBAD                 = 9,
+    ACPI_ERDT_TYPE_CARD                 = 10,
+    ACPI_ERDT_TYPE_RESERVED             = 11    /* 11 and above are reserved */
+
+};
+
+/*******************************************************************************
+ *
+ * RMDD - Resource Management Domain Description (RMDD) subtable
+ *
+ ******************************************************************************/
+
+typedef struct acpi_table_erdt_rmdd {
+        ACPI_SUBTABLE_HEADER_16    Header;
+        UINT16                     Flags;
+        UINT16                     IO_l3_Slices;       /* Number of slices in IO cache */
+        UINT8                      IO_l3_Sets;         /* Number of sets in IO cache */
+        UINT8                      IO_l3_Ways;         /* Number of ways in IO cache */
+        UINT64                     Reserved;
+        UINT16                     DomainId;           /* Unique domain ID */
+        UINT32                     MaxRmid;            /* Maximun RMID supported */
+        UINT64                     CregBase;           /* Control Register Base Address */
+        UINT16                     CregSize;           /* Control Register Size (4K pages) */
+        UINT8                      RmddStructs[];
+} ACPI_TABLE_ERDT_RMDD;
+
+
+/*******************************************************************************
+ *
+ * RMDD - CPU Agent Collection Description (CACD) subtable
+ *
+ ******************************************************************************/
+
+typedef struct acpi_table_erdt_cacd {
+        ACPI_SUBTABLE_HEADER_16    Header;
+        UINT16                     Reserved;
+        UINT16                     DomainId;           /* Unique domain ID */
+        UINT32                     X2APICIDS[];
+} ACPI_TABLE_ERDT_CACD;
+
+
+/*******************************************************************************
+ *
+ * RMDD - Device Agent Collection Description (DACD) subtable
+ *
+ ******************************************************************************/
+
+typedef struct acpi_table_erdt_dacd {
+        ACPI_SUBTABLE_HEADER_16    Header;
+        UINT16                     Reserved;
+        UINT16                     DomainId;           /* Unique domain ID */
+} ACPI_TABLE_ERDT_DACD;
+
+typedef struct acpi_table_erdt_dacd_dase {
+        UINT8               Type;
+        UINT8               Length;
+        UINT16              Segment;
+        UINT8               Reserved;
+        UINT8               StartBus;
+        UINT8               Path[];
+} ACPI_TABLE_ERDT_DACD_DASE;
+
+
+/*******************************************************************************
+ *
+ * RMDD - Cache Monitoring Registers for CPU Agents (CMRC) subtable
+ *
+ ******************************************************************************/
+
+typedef struct acpi_table_erdt_cmrc {
+        ACPI_SUBTABLE_HEADER_16    Header;
+        UINT32                     Reserved1;
+        UINT32                     Flags;
+        UINT8                      IndexFn;
+        UINT8                      Reserved2[11];
+        UINT64                     CmtRegBase;
+        UINT32                     CmtRegSize;
+        UINT16                     ClumpSize;
+        UINT16                     ClumpStride;
+        UINT64                     UpScale;
+} ACPI_TABLE_ERDT_CMRC;
+
+
+/*******************************************************************************
+ *
+ * RMDD - Memory-bandwidth Monitoring Registers for CPU Agents (MMRC) subtable
+ *
+ ******************************************************************************/
+
+typedef struct acpi_table_erdt_mmrc {
+        ACPI_SUBTABLE_HEADER_16    Header;
+        UINT32                     Reserved1;
+        UINT32                     Flags;
+        UINT8                      IndexFn;
+        UINT8                      Reserved2[11];
+        UINT64                     RegBase;
+        UINT32                     RegSize;
+        UINT8                      CounterWidth;
+        UINT64                     UpScale;
+        UINT8                      Reserved3[7];
+        UINT32                     CorrFactorListLen;
+        UINT32                     CorrFactorList[];
+} ACPI_TABLE_ERDT_MMRC;
+
+
+/*******************************************************************************
+ *
+ * RMDD - Memory-bandwidth Allocation Registers for CPU Agents (MARC) subtable
+ *
+ ******************************************************************************/
+
+typedef struct acpi_table_erdt_marc {
+        ACPI_SUBTABLE_HEADER_16    Header;
+        UINT16                     Reserved1;
+        UINT16                     Flags;
+        UINT8                      IndexFn;
+        UINT8                      Reserved2[7];
+        UINT64                     RegBaseOpt;
+        UINT64                     RegBaseMin;
+        UINT64                     RegBaseMax;
+        UINT32                     MbaRegSize;
+        UINT32                     MbaCtrlRange;
+} ACPI_TABLE_ERDT_MARC;
+
+
+/*******************************************************************************
+ *
+ * RMDD - Cache Allocation Registers for CPU Agents (CARC) subtable
+ *
+ ******************************************************************************/
+
+typedef struct acpi_table_erdt_carc {
+        ACPI_SUBTABLE_HEADER_16    Header;
+} ACPI_TABLE_ERDT_CARC;
+
+
+/*******************************************************************************
+ *
+ * RMDD - Cache Monitoring Registers for Device Agents (CMRD) subtable
+ *
+ ******************************************************************************/
+
+typedef struct acpi_table_erdt_cmrd {
+        ACPI_SUBTABLE_HEADER_16    Header;
+        UINT32                     Reserved1;
+        UINT32                     Flags;
+        UINT8                      IndexFn;
+        UINT8                      Reserved2[11];
+        UINT64                     RegBase;
+        UINT32                     RegSize;
+        UINT16                     CmtRegOff;
+        UINT16                     CmtClumpSize;
+        UINT64                     UpScale;
+} ACPI_TABLE_ERDT_CMRD;
+
+
+/*******************************************************************************
+ *
+ * RMDD - Cache Monitoring Registers for Device Agents (IBRD) subtable
+ *
+ ******************************************************************************/
+
+typedef struct acpi_table_erdt_ibrd {
+        ACPI_SUBTABLE_HEADER_16    Header;
+        UINT32                     Reserved1;
+        UINT32                     Flags;
+        UINT8                      IndexFn;
+        UINT8                      Reserved2[11];
+        UINT64                     RegBase;
+        UINT32                     RegSize;
+        UINT16                     TotalBwOffset;
+        UINT16                     IOMissBwOffset;
+        UINT16                     TotalBwClump;
+        UINT16                     IOMissBwClump;
+        UINT8                      Reserved3[7];
+        UINT8                      CounterWidth;
+        UINT64                     UpScale;
+        UINT32                     CorrFactorListLen;
+        UINT32                     CorrFactorList[];
+} ACPI_TABLE_ERDT_IBRD;
+
+
+/*******************************************************************************
+ *
+ * RMDD - IO bandwidth Allocation Registers for device agents (IBAD) subtable
+ *
+ ******************************************************************************/
+
+typedef struct acpi_table_erdt_ibad {
+        ACPI_SUBTABLE_HEADER_16    Header;
+} ACPI_TABLE_ERDT_IBAD;
+
+
+/*******************************************************************************
+ *
+ * RMDD - IO bandwidth Allocation Registers for Device Agents (CARD) subtable
+ *
+ ******************************************************************************/
+
+typedef struct acpi_table_erdt_card {
+        ACPI_SUBTABLE_HEADER_16    Header;
+        UINT32                     Reserved1;
+        UINT32                     Flags;
+        UINT32                     ContentionMask;
+        UINT8                      IndexFn;
+        UINT8                      Reserved2[7];
+        UINT64                     RegBase;
+        UINT32                     RegSize;
+        UINT16                     CatRegOffset;
+        UINT16                     CatRegBlockSize;
+} ACPI_TABLE_ERDT_CARD;
+
 
 /*******************************************************************************
  *
